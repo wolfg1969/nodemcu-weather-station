@@ -37,30 +37,34 @@ function getIn()
 end
 
 
+function reportToDomoticz() 
+  -- update sensor
+  domoticz.updateSensorTempHum(
+    config.DOMOTICZ_API_URL, 
+    config.DOMOTICZ_USER,
+    config.DOMOTICZ_PASSWD,
+    config.DOMOTICZ_INDOOR_DEVICE_ID,
+    data
+  )
+end
+
+
 function getOut()
   domoticz.getSensorTempHumBaro(
     config.DOMOTICZ_API_URL,
     config.DOMOTICZ_USER,
     config.DOMOTICZ_PASSWD,
     config.DOMOTICZ_OUTDOOR_DEVICE_ID,
+    
     function(outTemp, outHum, outCond)
         data.outTemp = outTemp or "?"
         data.outHum = outHum or "?"
         data.outCond = outCond or "?"
         display.render(data)
+        
+        reportToDomoticz()
+        
     end)
-end
-
-
-function update() 
-    getIn()
-    domoticz.updateSensorTempHum(
-      config.DOMOTICZ_API_URL, 
-      config.DOMOTICZ_USER,
-      config.DOMOTICZ_PASSWD,
-      config.DOMOTICZ_INDOOR_DEVICE_ID,
-      data
-    )
 end
 
 
@@ -71,10 +75,10 @@ init()
 display.init(config.OLED_ADDR)
 print("display inited")
 
-getOut()
 getIn()
+getOut()
 
-tmr.alarm(0, 1*60*1000, 1, update) -- 1*60*1000 = every 1 minutes
-tmr.alarm(2, 5*60*1000, 1, getOut) -- 5*60*1000 = every 5 minutes
+tmr.alarm(0, 1*60*1000, 1, getIn) -- 1*60*1000 = every 1 minutes
+tmr.alarm(2, 5*60*1000, 1, getOut) -- 1*60*1000 = every 5 minutes
 
 print("all set")

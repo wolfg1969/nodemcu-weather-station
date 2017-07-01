@@ -47,6 +47,7 @@ domoticz.getSensorTempHumBaro = function(apiURL, user, pass, deviceId, callback)
     function(code, data)
       if (code < 0) then
         print("http request failed")
+        callback()
       else
         obj:write(data)
         for k, v in pairs(weather) do
