@@ -5,7 +5,7 @@ domoticz.updateSensorTempHum = function(apiURL, user, pass, deviceId, data)
   local auth_code = crypto.toBase64(user .. ":" .. pass)
   
   http.get(apiURL .. "?type=command&param=udevice&idx=" .. deviceId .. 
-    "&nvalue=0&svalue=" .. data.inTemp .. ";" .. data.inHum .. ";0" .. data.inPress .. ";0",
+    "&nvalue=0&svalue=" .. data.inTemp .. ";" .. data.inHum .. ";0;" .. data.inPress .. ";0",
     
     "Authorization: Basic " .. auth_code .. "\r\n",
     
