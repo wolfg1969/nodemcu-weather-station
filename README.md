@@ -64,7 +64,7 @@
   * 添加类型为 HTTP/HTTPS poller 的硬件
     * Method: GET
     * Content Type: application/json
-    * URL: https://free-api.heweather.com/v5/now?city=<city code>&key=<auth key>&lang=en
+    * URL: <pre>https://free-api.heweather.com/v5/now?city=[city code]&key=[auth key]&lang=en</pre>
     * Command: heweather-now-parser.lua
   * 创建类型为 Temp + Humidity + Baro 的虚拟设备
   * * 将此设备的 id 做为气象站的 DOMOTICZ_OUTDOOR_DEVICE_ID 参数值
