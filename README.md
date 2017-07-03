@@ -2,7 +2,7 @@
 
 可显示室内温度、湿度、气压和室外温度、湿度、天气状况。
 
-![prototype](https://raw.githubusercontent.com/wolfg1969/nodemcu-weather-station/master/prototype.JPG)
+![prototype](https://raw.githubusercontent.com/wolfg1969/nodemcu-weather-station/master/prototype.jpg)
 
 ## 硬件
 * ESP8266
