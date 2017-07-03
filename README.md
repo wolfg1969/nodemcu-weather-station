@@ -2,6 +2,8 @@
 
 可显示室内温度、湿度、气压和室外温度、湿度、天气状况。
 
+![prototype](https://raw.githubusercontent.com/wolfg1969/nodemcu-weather-station/master/prototype.jpg)
+
 ## 硬件
 * ESP8266
 * 128x64 i2c OLED
@@ -70,3 +72,4 @@
   * * 将此设备的 id 做为气象站的 DOMOTICZ_OUTDOOR_DEVICE_ID 参数值
   * 将 domoticz_server 目录下的 heweather-now-parser.lua 放到 Domoticz 服务器主目录下的 scripts/lua_parsers 目录中
   
+Many thanks to [nfriedly/nodemcu-weather-station](https://github.com/nfriedly/nodemcu-weather-station), I learned a lot of knowledge from there.
