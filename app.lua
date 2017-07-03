@@ -12,16 +12,6 @@ local display = require("display")
 local domoticz = require("domoticz")
 local sensor = require("weather_sensor")
 
--- setup I2c and connect to modules
-function init()
-    i2c.setup(0, config.OLED_SDA_PIN, config.OLED_SCL_PIN, i2c.SLOW)
-    i2c.setup(0, config.BME280_SDA_PIN, config.BME280_SCL_PIN, i2c.SLOW)
-    
-    display.init(config.OLED_ADDR)
-
-    sensor.init()
-end
-
 
 function getIn() 
   
@@ -29,6 +19,7 @@ function getIn()
     data.inTemp = inTemp
     data.inHum = inHum
     data.inPress = inPress
+    
     display.render(data)
   end)
 end
@@ -68,12 +59,18 @@ end
 
 print("setting up")
 
-init()
+i2c.setup(0, config.SDA_PIN, config.SCL_PIN, i2c.SLOW)
+sensor.init()
 
-getIn()
-getOut()
+-- delay 10 seconds to wait for sensor
+tmr.alarm(0, 10*1000, tmr.ALARM_SINGLE, function()
+  display.init(config.OLED_ADDR)
+  getIn()
+  getOut()
+end)
 
-tmr.alarm(0, 1*60*1000, 1, getIn) -- 1*60*1000 = every 1 minutes
-tmr.alarm(2, 5*60*1000, 1, getOut) -- 1*60*1000 = every 5 minutes
+
+tmr.alarm(1, 1*60*1000, tmr.ALARM_AUTO, getIn) -- 1*60*1000 = every 1 minutes
+tmr.alarm(2, 5*60*1000, tmr.ALARM_AUTO, getOut) -- 1*60*1000 = every 5 minutes
 
 print("all set")

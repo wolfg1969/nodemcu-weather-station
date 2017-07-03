@@ -13,6 +13,7 @@ end
 
 weather_sensor.init = function()
   result = bme280.setup()  -- 2 if sensor is BME280, 1 if sensor is BMP280
+  print(result)
   if (result == nil) then
     BME280_installed = false
   elseif (result == 2) then
@@ -38,7 +39,10 @@ weather_sensor.read = function(dhtPin, alt, callback)
     
     T, P, H, QNH = bme280.read(alt)
     
-    local Tsgn = (T < 0 and -1 or 1) 
+    local Tsgn = 1
+    if (T < 0) then
+      Tsgn = -1
+    end 
     T = Tsgn*T
     
     inTemp = string.format("%s%d.%.1d", Tsgn<0 and "-" or "", T/100, T%100)

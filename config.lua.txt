@@ -1,12 +1,9 @@
 local config = {
   OLED_ADDR = 0x3c,
   
-  OLED_SDA_PIN = 1, -- OLED SDA Pin, D1
-  OLED_SPL_PIN = 2, -- OLED SCL Pin, D2
-  DHT_Pin = 3, -- DHT Pin, D3
-  
-  BME280_SDA_PIN = 5, -- BMP280 SDA Pin, D1
-  BME280_SPL_PIN = 6, -- BMP280 SCL Pin, D2
+  SDA_PIN = 1, -- SDA Pin, D1
+  SCL_PIN = 2, -- SCL Pin, D2
+  DHT_PIN = 3, -- DHT Pin, D3
   
   ALTITUDE = 72,
   
