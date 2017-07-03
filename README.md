@@ -35,6 +35,24 @@
 
 ## 参数配置
 将 config.lua.txt 复制成 config.lua 并根据实际环境修改参数值
+```lua
+  OLED_ADDR = 0x3c,
+  
+  SDA_PIN = 1, -- SDA Pin, D1
+  SCL_PIN = 2, -- SCL Pin, D2
+  DHT_PIN = 3, -- DHT Pin, D3
+  
+  ALTITUDE = 72, -- 海拔高度
+  
+  WIFI_SSID = "<WIFI_SSID>",
+  WIFI_PASSWD = "<WIFI_PASSWD>",
+  
+  DOMOTICZ_USER = "<DOMOTICZ_USER>",
+  DOMOTICZ_PASSWD = "<DOMOTICZ_PASSWD>",
+  DOMOTICZ_API_URL = "<DOMOTICZ_API_URL>",
+  DOMOTICZ_INDOOR_DEVICE_ID = "<DOMOTICZ_INDOOR_DEVICE_ID>",
+  DOMOTICZ_OUTDOOR_DEVICE_ID = "<DOMOTICZ_OUTDOOR_DEVICE_ID>"
+```
 
 ## Domoticz 集成
 
