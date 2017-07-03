@@ -1,7 +1,3 @@
-sda = 1 -- SDA Pin, D1
-scl = 2 -- SCL Pin, D2
-dhtPin = 3 -- DHT Pin, D3
-
 local data = {
     inTemp = "",
     outTemp = "",
@@ -14,26 +10,27 @@ local data = {
 local config = require('config')
 local display = require("display")
 local domoticz = require("domoticz")
+local sensor = require("weather_sensor")
 
 -- setup I2c and connect to modules
 function init()
-    i2c.setup(0, sda, scl, i2c.SLOW)
+    i2c.setup(0, config.OLED_SDA_PIN, config.OLED_SCL_PIN, i2c.SLOW)
+    i2c.setup(0, config.BME280_SDA_PIN, config.BME280_SCL_PIN, i2c.SLOW)
+    
+    display.init(config.OLED_ADDR)
+
+    sensor.init()
 end
 
 
 function getIn() 
-
-    status,temp,humidity,temp_decimial,humi_decimial = dht.read11(dhtPin)
-    if (status == dht.OK) then
-      data.inTemp = temp
-      data.inHum = humidity
-      print(temp..", "..humidity)
-    else
-      -- other possibilities are dht.ERROR_TIMEOUT and dht.ERROR_CHECKSUM
-      data.inTemp = "?"
-      data.inHum = "?"
-    end
+  
+  sensor.read(config.DHT_PIN, config.ALTITUDE, function(inTemp, inHum, inPress)
+    data.inTemp = inTemp
+    data.inHum = inHum
+    data.inPress = inPress
     display.render(data)
+  end)
 end
 
 
@@ -57,11 +54,12 @@ function getOut()
     config.DOMOTICZ_OUTDOOR_DEVICE_ID,
     
     function(outTemp, outHum, outCond)
+      
         data.outTemp = outTemp or "?"
         data.outHum = outHum or "?"
         data.outCond = outCond or "?"
-        display.render(data)
         
+        display.render(data)
         reportToDomoticz()
         
     end)
@@ -71,9 +69,6 @@ end
 print("setting up")
 
 init()
-
-display.init(config.OLED_ADDR)
-print("display inited")
 
 getIn()
 getOut()

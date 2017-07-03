@@ -2,12 +2,12 @@ local domoticz = {}
 
 domoticz.updateSensorTempHum = function(apiURL, user, pass, deviceId, data)
   
-  local auth_code = crypto.toBase64(user..":"..pass)
+  local auth_code = crypto.toBase64(user .. ":" .. pass)
   
-  http.get(apiURL.."?type=command&param=udevice&idx="..deviceId..
-    "&nvalue=0&svalue="..data.inTemp..";"..data.inHum..";0",
+  http.get(apiURL .. "?type=command&param=udevice&idx=" .. deviceId .. 
+    "&nvalue=0&svalue=" .. data.inTemp .. ";" .. data.inHum .. ";0" .. data.inPress .. ";0",
     
-    "Authorization: Basic "..auth_code.."\r\n",
+    "Authorization: Basic " .. auth_code .. "\r\n",
     
     function(code, data)
       if (code < 0) then
@@ -38,11 +38,11 @@ domoticz.getSensorTempHumBaro = function(apiURL, user, pass, deviceId, callback)
   
   obj = sjson.decoder(t)
   
-  local auth_code = crypto.toBase64(user..":"..pass)
+  local auth_code = crypto.toBase64(user .. ":" .. pass)
   
-  http.get(apiURL.."?type=devices&rid="..deviceId,
+  http.get(apiURL .. "?type=devices&rid=" .. deviceId,
     
-    "Authorization: Basic "..auth_code.."\r\n",
+    "Authorization: Basic " .. auth_code .. "\r\n",
     
     function(code, data)
       if (code < 0) then

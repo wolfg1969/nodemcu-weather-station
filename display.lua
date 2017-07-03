@@ -2,9 +2,11 @@ local display = {}
 
 local disp
 
+
 display.init = function(oledAddr)
-    disp = u8g.ssd1306_128x64_i2c(0x3C)
+    disp = u8g.ssd1306_128x64_i2c(oledAddr)
 end
+
 
 function draw(data)
     local y = 0
@@ -31,11 +33,13 @@ function draw(data)
     disp:drawStr(64, y, data.outHum .. "% humid")
 end
 
+
 display.render = function(data)
     disp:firstPage()
     repeat
         draw(data)
     until disp:nextPage() == false
 end
+
 
 return display
