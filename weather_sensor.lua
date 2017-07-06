@@ -48,7 +48,7 @@ weather_sensor.read = function(dhtPin, alt, callback)
     inTemp = string.format("%s%d.%.1d", Tsgn<0 and "-" or "", T/100, T%100)
     
     if (using_BME280) then
-      inHum = string.format("%d.%.1d%%", H/1000, H%1000)
+      inHum = string.format("%d.%.1d", H/1000, H%1000)
     else  -- BMP280 has no humidity data
       readDHT11(dhtPin, function(temp, humidity)
         inHum = humidity
