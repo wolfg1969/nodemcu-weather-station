@@ -32,8 +32,16 @@ weather_sensor.read = function(dhtPin, alt, callback)
   if (not BME280_installed) then
     
     readDHT(dhtPin, function(temp, humidity)
-      inTemp = temp
-      inHum = humidity
+      if (temp <= 100) then
+        inTemp = temp
+      else
+        inTemp = temp / 25.6
+      end
+      if (humidity <= 100) then
+        inHum = humidity
+      else
+        inHum = humidity / 25.6
+      end
       callback(inTemp, inHum, inPress)
     end)
     
@@ -57,6 +65,8 @@ weather_sensor.read = function(dhtPin, alt, callback)
       readDHT(dhtPin, function(temp, humidity)
         if (humidity <= 100) then
           inHum = humidity
+        else
+          inHum = humidity / 25.6
         end
         callback(inTemp, inHum, inPress)
       end)
