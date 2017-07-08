@@ -20,7 +20,12 @@ function getIn()
     data.inHum = inHum
     data.inPress = inPress
     
-    display.render(data)
+    print(data.inTemp .. ", " .. data.inHum .. ", " .. data.inPress)
+    if (config.HAS_DISPLAY) then
+      display.render(data)
+    else
+      reportToDomoticz()
+    end
   end)
 end
 
@@ -46,12 +51,12 @@ function getOut()
     
     function(outTemp, outHum, outCond)
       
-        data.outTemp = outTemp or "?"
-        data.outHum = outHum or "?"
-        data.outCond = outCond or "?"
-        
-        display.render(data)
-        reportToDomoticz()
+      data.outTemp = outTemp or "?"
+      data.outHum = outHum or "?"
+      data.outCond = outCond or "?"
+      
+      display.render(data)
+      reportToDomoticz()
         
     end)
 end
@@ -60,17 +65,23 @@ end
 print("setting up")
 
 i2c.setup(0, config.SDA_PIN, config.SCL_PIN, i2c.SLOW)
+if (config.HAS_DISPLAY) then
+  display.init(config.OLED_ADDR)
+end
 sensor.init()
 
--- delay 10 seconds to wait for sensor
-tmr.alarm(0, 10*1000, tmr.ALARM_SINGLE, function()
-  display.init(config.OLED_ADDR)
+-- delay 5 seconds to wait for sensor
+tmr.alarm(0, 5*1000, tmr.ALARM_SINGLE, function()
   getIn()
-  getOut()
+  if (config.HAS_DISPLAY) then
+    getOut()
+  end
 end)
 
 
 tmr.alarm(1, 1*60*1000, tmr.ALARM_AUTO, getIn) -- 1*60*1000 = every 1 minutes
-tmr.alarm(2, 5*60*1000, tmr.ALARM_AUTO, getOut) -- 1*60*1000 = every 5 minutes
+if (config.HAS_DISPLAY) then
+  tmr.alarm(2, 5*60*1000, tmr.ALARM_AUTO, getOut) -- 1*60*1000 = every 5 minutes
+end
 
 print("all set")

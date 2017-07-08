@@ -3,8 +3,9 @@ local weather_sensor = {}
 local BME280_installed = true
 local using_BME280 = false
 
-function readDHT11(dhtPin, callback)
-  status, temp, humidity, temp_decimial, humi_decimial = dht.read11(dhtPin)
+function readDHT(dhtPin, callback)
+  status, temp, humidity, temp_decimial, humi_decimial = dht.read(dhtPin)
+  print("dht read status=" .. status .. ", temp=" .. temp .. ", hum=" .. humidity)
   if (status == dht.OK) then
     callback(temp, humidity)
   end
@@ -30,9 +31,10 @@ weather_sensor.read = function(dhtPin, alt, callback)
   
   if (not BME280_installed) then
     
-    readDHT11(dhtPin, function(temp, humidity)
+    readDHT(dhtPin, function(temp, humidity)
       inTemp = temp
       inHum = humidity
+      callback(inTemp, inHum, inPress)
     end)
     
   else
@@ -46,22 +48,22 @@ weather_sensor.read = function(dhtPin, alt, callback)
     T = Tsgn*T
     
     inTemp = string.format("%s%d.%.1d", Tsgn<0 and "-" or "", T/100, T%100)
+    inPress = string.format("%d.%.1d", QNH/1000, QNH%1000)
     
     if (using_BME280) then
       inHum = string.format("%d.%.1d", H/1000, H%1000)
+      callback(inTemp, inHum, inPress)
     else  -- BMP280 has no humidity data
-      readDHT11(dhtPin, function(temp, humidity)
-        inHum = humidity
+      readDHT(dhtPin, function(temp, humidity)
+        if (humidity <= 100) then
+          inHum = humidity
+        end
+        callback(inTemp, inHum, inPress)
       end)
     end
     
-    inPress = string.format("%d.%.1d", QNH/1000, QNH%1000)
   end
-  
-  print(string.format("T=%s, H=%s, QNH=%s", inTemp, inHum, inPress))
-  
-  callback(inTemp, inHum, inPress)
-  
+    
 end
 
 
