@@ -75,12 +75,3 @@
   * * 将此设备的 id 做为气象站的 DOMOTICZ_OUTDOOR_DEVICE_ID 参数值
   * 将 domoticz_server 目录下的 heweather-now-parser.lua 放到 Domoticz 服务器主目录下的 scripts/lua_parsers 目录中
   
-
-## 心得
-
-* 某宝上的传感器模块、OLED模块质量参差不齐
-* 一个奇怪的 DHT11 模块，用 dht.read11() 报 ERROR_CHECKSUM 错误，换 dht.read() 读到的值都是几百多！ 搜到 [Arduino 论坛里的一个帖子](http://forum.arduino.cc/index.php?topic=280159.0) 里面提到需要将结果值除以 25.6 才能得到准确的温度和湿度值。
-* BME280 好用，一个模块，温度、湿度、气压全解决，就是贵了些。
-  
-  
-Many thanks to [nfriedly/nodemcu-weather-station](https://github.com/nfriedly/nodemcu-weather-station), I learned a lot of knowledge from there.
