@@ -49,13 +49,13 @@ elseif aqi_value >=151 then
   alert_level = 4
 end
 
-local qlty_desc = qlty .. ", " .. aqi .. " AQI" .. " @" .. update
+local short_qlty_desc = qlty .. ", " .. aqi
+local long_qlty_desc = qlty .. ", " .. aqi .. " AQI" .. " @" .. update
 
 print("aqi=" .. aqi .. " pm10=" .. pm10 .. " pm25=" .. pm25 .." qlty=" .. qlty)
 
 domoticz_updateDevice(24, 0, aqi)
 domoticz_updateDevice(25, 0, pm25)
 domoticz_updateDevice(26, 0, pm10)
-domoticz_updateDevice(27, 0, qlty_desc)
-domoticz_updateDevice(28, alert_level, qlty_desc)
-
+domoticz_updateDevice(27, 0, long_qlty_desc)
+domoticz_updateDevice(28, alert_level, short_qlty_desc)
