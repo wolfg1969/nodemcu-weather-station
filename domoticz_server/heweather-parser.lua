@@ -146,9 +146,18 @@ s = request['content']
 print("s="..s)
 
 local temp = domoticz_applyJsonPath(s, '.HeWeather5[0].now.tmp')
-local hum = domoticz_applyJsonPath(s, '.HeWeather5[0].now.hum')
+local hum = tonumber(domoticz_applyJsonPath(s, '.HeWeather5[0].now.hum'))
 local pres = domoticz_applyJsonPath(s, '.HeWeather5[0].now.pres')
 local condCode = tonumber(domoticz_applyJsonPath(s, '.HeWeather5[0].now.cond.code'))
+
+local humStat = 0
+if hum < 25 then
+  humStat = 2
+elseif hum > 60 then
+  humStat = 3
+else if hum >= 25 and hum <= 60 then
+  humStat = 1
+end
 
 local cond = 0
 if condCode == 100 then
@@ -163,7 +172,7 @@ end
 
 print("temp=" .. temp .. " hum=" .. hum .. " pres=" .. pres .." cond=" .. cond)
 
-domoticz_updateDevice(22, 0, temp .. ";" .. hum .. ";" .. "0;" .. pres .. ";" .. cond)
+domoticz_updateDevice(22, 0, temp .. ";" .. hum .. ";" .. humStat .. ";" .. pres .. ";" .. cond)
 
 -- feel temp
 local fl = domoticz_applyJsonPath(s, '.HeWeather5[0].now.fl')
