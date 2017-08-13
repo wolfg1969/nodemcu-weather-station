@@ -4,8 +4,18 @@ domoticz.updateSensorTempHum = function(apiURL, user, pass, deviceId, data)
   
   local auth_code = crypto.toBase64(user .. ":" .. pass)
   
+  local hum = tonumber(data.inHum)
+  local humStat = 0
+  if hum < 25 then
+    humStat = 2
+  elseif hum > 60 then
+    humStat = 3
+  elseif hum >= 25 and hum <= 60 then
+    humStat = 1
+  end
+  
   http.get(apiURL .. "?type=command&param=udevice&idx=" .. deviceId .. 
-    "&nvalue=0&svalue=" .. data.inTemp .. ";" .. data.inHum .. ";0;" .. data.inPress .. ";0",
+    "&nvalue=0&svalue=" .. data.inTemp .. ";" .. hum .. ";" .. humStat .. ";" .. data.inPress .. ";0",
     
     "Authorization: Basic " .. auth_code .. "\r\n",
     

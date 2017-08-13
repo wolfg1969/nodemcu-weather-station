@@ -155,7 +155,7 @@ if hum < 25 then
   humStat = 2
 elseif hum > 60 then
   humStat = 3
-else if hum >= 25 and hum <= 60 then
+elseif hum >= 25 and hum <= 60 then
   humStat = 1
 end
 
