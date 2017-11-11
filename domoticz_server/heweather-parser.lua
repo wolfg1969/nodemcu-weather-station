@@ -71,7 +71,7 @@ print("temp=" .. temp .. " hum=" .. hum .. " pres=" .. pres .." cond=" .. cond)
 domoticz_updateDevice(22, 0, temp .. ";" .. hum .. ";" .. humStat .. ";" .. pres .. ";" .. cond)
 
 -- feel temp
-local fl = domoticz_applyJsonPath(s, '.HeWeather5[0].now.fl')
+local fl = domoticz_applyJsonPath(s, '.HeWeather6[0].now.fl')
 domoticz_updateDevice(38, 0, fl)
 
 --[=====[ 
