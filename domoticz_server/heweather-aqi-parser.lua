@@ -1,26 +1,38 @@
 --[=====[ 
-    "HeWeather5": [
+https://www.heweather.com/documents/api/s6/air-now
+{
+    "HeWeather6": [
         {
-            "aqi": {
-                "city": {
-                    "aqi": "170",
-                    "pm10": "96",
-                    "pm25": "129",
-                    "qlty": "Unhealthy"
-                }
+            "air_now_city": {
+                "aqi": "19",
+                "co": "0",
+                "main": "",
+                "no2": "34",
+                "o3": "31",
+                "pm10": "18",
+                "pm25": "8",
+                "pub_time": "2017-11-07 22:00",
+                "qlty": "优",
+                "so2": "2"
             },
+            "air_now_station": [
+                ...
+            ],
             "basic": {
-                "city": "fengtai",
-                "cnty": "China",
-                "id": "CN101010900",
-                "lat": "39.86364365",
-                "lon": "116.28696442",
-                "update": {
-                    "loc": "2017-07-06 08:49",
-                    "utc": "2017-07-06 00:49"
-                }
+                "cid": "CN101010100",
+                "location": "北京",
+                "parent_city": "北京",
+                "admin_area": "北京",
+                "cnty": "中国",
+                "lat": "39.90498734",
+                "lon": "116.40528870",
+                "tz": "+8.0"
             },
-            "status": "ok"
+            "status": "ok",
+            "update": {
+                "loc": "2017-11-07 22:46",
+                "utc": "2017-11-07 14:46"
+            }
         }
     ]
 }
@@ -31,11 +43,11 @@ print("s="..s)
 
 local deviceId = 22
 
-local aqi = domoticz_applyJsonPath(s, '.HeWeather5[0].aqi.city.aqi')
-local pm10 = domoticz_applyJsonPath(s, '.HeWeather5[0].aqi.city.pm10')
-local pm25 = domoticz_applyJsonPath(s, '.HeWeather5[0].aqi.city.pm25')
-local qlty = domoticz_applyJsonPath(s, '.HeWeather5[0].aqi.city.qlty')
-local update = domoticz_applyJsonPath(s, '.HeWeather5[0].basic.update.loc')
+local aqi = domoticz_applyJsonPath(s, '.HeWeather6[0].air_now_city.aqi')
+local pm10 = domoticz_applyJsonPath(s, '.HeWeather6[0].air_now_city.pm10')
+local pm25 = domoticz_applyJsonPath(s, '.HeWeather6[0].air_now_city.pm25')
+local qlty = domoticz_applyJsonPath(s, '.HeWeather6[0].air_now_city.qlty')
+local update = domoticz_applyJsonPath(s, '.HeWeather6[0].update.loc')
 
 local alert_level = 0  -- 0=gray, 1=green, 2=yellow, 3=orange, 4=red
 aqi_value = tonumber(aqi)

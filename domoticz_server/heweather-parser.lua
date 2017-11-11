@@ -1,141 +1,37 @@
 --[=====[ 
-https://free-api.heweather.com/v5/weather?city=yourcity&key=yourkey
-https://www.heweather.com/documents/api/v5/weather
+https://www.heweather.com/documents/api/s6/weather-now
+https://free-api.heweather.com/v5/weather?location=yourcity&key=yourkey
 {
-    "HeWeather5": [
+    "HeWeather6": [
         {
-            "alarms": [
-                {
-                    "level": "蓝色",
-                    "stat": "预警中",
-                    "title": "山东省青岛市气象台发布大风蓝色预警",
-                    "txt": "青岛市气象台2016年08月29日15时24分继续发布大风蓝色预警信号：预计今天下午到明天，我市北风风力海上6到7级阵风9级，陆地4到5阵风7级，请注意防范。",
-                    "type": "大风"
-                }
-            ],
-            "aqi": {
-                "city": {
-                    "aqi": "60",
-                    "co": "0",
-                    "no2": "14",
-                    "o3": "95",
-                    "pm10": "67",
-                    "pm25": "15",
-                    "qlty": "良",  //共六个级别，分别：优，良，轻度污染，中度污染，重度污染，严重污染
-                    "so2": "10"
-                }
-            },
             "basic": {
-                "city": "青岛",
+                "cid": "CN101010100",
+                "location": "北京",
+                "parent_city": "北京",
+                "admin_area": "北京",
                 "cnty": "中国",
-                "id": "CN101120201",
-                "lat": "36.088000",
-                "lon": "120.343000",
-                "prov": "山东"  //城市所属省份（仅限国内城市）
-                "update": {
-                    "loc": "2016-08-30 11:52",
-                    "utc": "2016-08-30 03:52"
-                }
+                "lat": "39.90498734",
+                "lon": "116.40528870",
+                "tz": "0.0"
             },
-            "daily_forecast": [
-                {
-                    "astro": {
-                        "mr": "03:09",
-                        "ms": "17:06",
-                        "sr": "05:28",
-                        "ss": "18:29"
-                    },
-                    "cond": {
-                        "code_d": "100",
-                        "code_n": "100",
-                        "txt_d": "晴",
-                        "txt_n": "晴"
-                    },
-                    "date": "2016-08-30",
-                    "hum": "45",
-                    "pcpn": "0.0",
-                    "pop": "8",
-                    "pres": "1005",
-                    "tmp": {
-                        "max": "29",
-                        "min": "22"
-                    },
-                    "vis": "10",
-                    "wind": {
-                        "deg": "339",
-                        "dir": "北风",
-                        "sc": "4-5",
-                        "spd": "24"
-                    }
-                }
-            ],
-            "hourly_forecast": [
-                {
-                    "cond": {
-                        "code": "100",
-                        "txt": "晴"
-                    },
-                    "date": "2016-08-30 12:00",
-                    "hum": "47",
-                    "pop": "0",
-                    "pres": "1006",
-                    "tmp": "29",
-                    "wind": {
-                        "deg": "335",
-                        "dir": "西北风",
-                        "sc": "4-5",
-                        "spd": "36"
-                    }
-                }
-            ],
             "now": {
-                "cond": {
-                    "code": "100",
-                    "txt": "晴"
-                },
-                "fl": "28",
-                "hum": "41",
+                "cond_code": "101",
+                "cond_txt": "多云",
+                "fl": "16",
+                "hum": "73",
                 "pcpn": "0",
-                "pres": "1005",
-                "tmp": "26",
-                "vis": "10",
-                "wind": {
-                    "deg": "330",
-                    "dir": "西北风",
-                    "sc": "6-7",
-                    "spd": "34"
-                }
+                "pres": "1017",
+                "tmp": "14",
+                "vis": "1",
+                "wind_deg": "11",
+                "wind_dir": "北风",
+                "wind_sc": "微风",
+                "wind_spd": "6"
             },
             "status": "ok",
-            "suggestion": {
-                "comf": {
-                    "brf": "较舒适",
-                    "txt": "白天天气晴好，您在这种天气条件下，会感觉早晚凉爽、舒适，午后偏热。"
-                },
-                "cw": {
-                    "brf": "较不宜",
-                    "txt": "较不宜洗车，未来一天无雨，风力较大，如果执意擦洗汽车，要做好蒙上污垢的心理准备。"
-                },
-                "drsg": {
-                    "brf": "热",
-                    "txt": "天气热，建议着短裙、短裤、短薄外套、T恤等夏季服装。"
-                },
-                "flu": {
-                    "brf": "较易发",
-                    "txt": "虽然温度适宜但风力较大，仍较易发生感冒，体质较弱的朋友请注意适当防护。"
-                },
-                "sport": {
-                    "brf": "较适宜",
-                    "txt": "天气较好，但风力较大，推荐您进行室内运动，若在户外运动请注意防风。"
-                },
-                "trav": {
-                    "brf": "适宜",
-                    "txt": "天气较好，风稍大，但温度适宜，是个好天气哦。适宜旅游，您可以尽情地享受大自然的无限风光。"
-                },
-                "uv": {
-                    "brf": "强",
-                    "txt": "紫外线辐射强，建议涂擦SPF20左右、PA++的防晒护肤品。避免在10点至14点暴露于日光下。"
-                }
+            "update": {
+                "loc": "2017-10-26 17:29",
+                "utc": "2017-10-26 09:29"
             }
         }
     ]
@@ -145,10 +41,10 @@ s = request['content']
 
 print("s="..s)
 
-local temp = domoticz_applyJsonPath(s, '.HeWeather5[0].now.tmp')
-local hum = tonumber(domoticz_applyJsonPath(s, '.HeWeather5[0].now.hum'))
-local pres = domoticz_applyJsonPath(s, '.HeWeather5[0].now.pres')
-local condCode = tonumber(domoticz_applyJsonPath(s, '.HeWeather5[0].now.cond.code'))
+local temp = domoticz_applyJsonPath(s, '.HeWeather6[0].now.tmp')
+local hum = tonumber(domoticz_applyJsonPath(s, '.HeWeather6[0].now.hum'))
+local pres = domoticz_applyJsonPath(s, '.HeWeather6[0].now.pres')
+local condCode = tonumber(domoticz_applyJsonPath(s, '.HeWeather6[0].now.cond_code'))
 
 local humStat = 0
 if hum < 25 then
@@ -189,9 +85,9 @@ domoticz_updateDevice(38, 0, fl)
  22 = Temperature
  24 = Temperature Windchill
 --]=====]
-local wb = domoticz_applyJsonPath(s, '.HeWeather5[0].now.wind.deg')
-local wd = domoticz_applyJsonPath(s, '.HeWeather5[0].now.wind.dir')
-local ws = domoticz_applyJsonPath(s, '.HeWeather5[0].now.wind.spd')  -- km/h
+local wb = domoticz_applyJsonPath(s, '.HeWeather6[0].now.wind_deg')
+local wd = domoticz_applyJsonPath(s, '.HeWeather6[0].now.wind_dir')
+local ws = domoticz_applyJsonPath(s, '.HeWeather6[0].now.wind_spd')  -- km/h
 ws = 10 * tonumber(ws) * 1000 / 3600
 --local wg = domoticz_applyJsonPath(s, '.HeWeather5[0].now.wind.sc')
 local wg = "0"
